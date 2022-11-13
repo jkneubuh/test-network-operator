@@ -1,5 +1,5 @@
 # test-network-operator
-Creates a test network on Kubernetes with the Hyperledger [fabric-operator](https://github.com/hyperledger-labs/fabric-operator)  
+Create a test network on [KIND](https://kind.sigs.k8s.io) with the [Hyperledger Fabric Operator](https://github.com/hyperledger-labs/fabric-operator)  
 
 ## TL/DR
 
