@@ -3,31 +3,29 @@ Creates a HL Fabric network using fabric-operator
 
 ## TL/DR
 
+- On your mark
 ```shell
 just check 
+```
 
+- Get set
+```shell
 just kind 
 ```
 
+- Go! 
 ```shell
 just network-up
 ```
 
+- TODO: 
 ```shell
-export TEST_NETWORK_CHANNEL_NAME=mychannel
-
 just create-channel
 
 just install-chaincode 
 ```
 
 ## Teardown
-
-```shell
-just network-down
-```
-
-or 
 
 ```shell
 just unkind
