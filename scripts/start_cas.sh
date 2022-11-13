@@ -14,9 +14,3 @@ sleep 5
 wait_for ibpca org0-ca
 wait_for ibpca org1-ca
 wait_for ibpca org2-ca
-
-#  enroll_bootstrap_rcaadmin org0 rcaadmin rcaadminpw
-#  enroll_bootstrap_rcaadmin org1 rcaadmin rcaadminpw
-#  enroll_bootstrap_rcaadmin org2 rcaadmin rcaadminpw
-
-
