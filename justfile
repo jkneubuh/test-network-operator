@@ -94,5 +94,10 @@ operator: namespace
 cas:
     #!/bin/bash
     export NS={{ namespace }}
-
     scripts/start_cas.sh
+
+# depend on cas?
+network:
+    #!/bin/bash
+    export NS={{ namespace }}
+    scripts/start_network.sh

@@ -54,7 +54,8 @@ spec:
         - name: image-pull-secret
       containers:
         - name: fabric-operator
-          image: ghcr.io/hyperledger-labs/fabric-operator:latest-amd64
+#          image: ghcr.io/hyperledger-labs/fabric-operator:latest-amd64
+          image: localhost:5000/fabric-operator:latest-arm64
           command:
             - ibp-operator
           livenessProbe:
