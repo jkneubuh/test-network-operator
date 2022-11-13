@@ -65,39 +65,27 @@ unkind:
 
 
 ###############################################################################
-# Operator
+# Test Network
 ###############################################################################
-
-# Create the target namespace
-namespace:
-    #!/bin/bash
-    cat << EOF | kubectl apply -f -
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: {{ namespace }}
-    EOF
-
 
 # Launch the operator in the target namespace
-operator: namespace
+operator:
+    scripts/start_operator.sh
+
+# Bring up the test network
+network-up: network-cas network-nodes
+
+# Shut down the test network
+network-down:
     #!/bin/bash
+    kubectl -n {{ namespace }} delete ibpca --all
+    kubectl -n {{ namespace }} delete ibppeer --all
+    kubectl -n {{ namespace }} delete ibporderer --all
 
-    kubectl -n {{ namespace }} apply -k kustomization/operator
-    kubectl -n {{ namespace }} rollout status deploy fabric-operator
-
-
-###############################################################################
-# Network
-###############################################################################
-
-cas:
-    #!/bin/bash
-    export NS={{ namespace }}
+# Bring up the org CAs
+network-cas:
     scripts/start_cas.sh
 
-# depend on cas?
-network:
-    #!/bin/bash
-    export NS={{ namespace }}
+# Bring up the network peer and orderer nodes
+network-nodes:
     scripts/start_network.sh
