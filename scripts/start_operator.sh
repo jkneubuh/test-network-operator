@@ -8,5 +8,7 @@ metadata:
   name: ${namespace}
 EOF
 
-kubectl -n ${namespace} apply -k kustomization/operator
+# Substitute just/env variables into the kustomization before applying to k8s
+kubectl kustomize kustomization/operator | envsubst | kubectl -n ${namespace} apply -f -
+
 kubectl -n ${namespace} rollout status deploy fabric-operator

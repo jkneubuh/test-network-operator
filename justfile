@@ -44,9 +44,8 @@ check:
 ###############################################################################
 
 cluster_name        := env_var_or_default("TEST_NETWORK_CLUSTER_NAME",      "kind")
-cluster_target      := env_var_or_default("TEST_NETWORK_CLUSTER_TARGET",    "kind")
-ingress_domain      := env_var_or_default("TEST_NETWORK_INGRESS_DOMAIN",    "localho.st")
 namespace           := env_var_or_default("TEST_NETWORK_NAMESPACE",         "test-network")
+operator_image      := env_var_or_default("TEST_NETWORK_OPERATOR_IMAGE",    "ghcr.io/hyperledger-labs/fabric-operator:latest-amd64")
 
 # Start a local KIND cluster with nginx, localhost:5000 registry, and *.localho.st alias in kube DNS
 kind: unkind
