@@ -67,19 +67,21 @@ unkind:
 # Test Network
 ###############################################################################
 
-# Launch the operator in the target namespace
-operator:
-    scripts/start_operator.sh
-
 # Bring up the test network
 network-up: operator network-cas network-nodes
 
 # Shut down the test network
 network-down:
     #!/bin/bash
+
+    # or maybe kubectl delete namespace {{ namespace }} ?
     kubectl -n {{ namespace }} delete ibpca --all
     kubectl -n {{ namespace }} delete ibppeer --all
     kubectl -n {{ namespace }} delete ibporderer --all
+
+# Launch the operator in the target namespace
+operator:
+    scripts/start_operator.sh
 
 # Bring up the org CAs
 network-cas:
