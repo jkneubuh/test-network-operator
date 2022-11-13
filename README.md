@@ -18,7 +18,7 @@ Go!
 just network-up
 ```
 
-`w00t w00t`: [k9s](https://k9scli.io/topics/install/)
+Check k8s with [k9s](https://k9scli.io/topics/install/):  
 ```shell
 k9s -n test-network
 ```
