@@ -72,7 +72,7 @@ operator:
     scripts/start_operator.sh
 
 # Bring up the test network
-network-up: network-cas network-nodes
+network-up: operator network-cas network-nodes
 
 # Shut down the test network
 network-down:
