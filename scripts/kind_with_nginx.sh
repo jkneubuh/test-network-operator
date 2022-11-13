@@ -124,7 +124,7 @@ function start_cert_manager() {
 # Install an Nginx ingress controller bound to port 80 and 443.
 #
 function start_nginx() {
-  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+  kubectl apply -k kustomization/nginx
 
   sleep 10
 

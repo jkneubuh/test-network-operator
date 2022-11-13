@@ -40,7 +40,7 @@ check:
 
 
 ###############################################################################
-#
+# KIND / k8s
 ###############################################################################
 
 cluster_name        := env_var_or_default("TEST_NETWORK_CLUSTER_NAME",      "kind")
@@ -63,8 +63,9 @@ unkind:
         docker rm kind-registry
     fi
 
+
 ###############################################################################
-#
+# Operator
 ###############################################################################
 
 # Create the target namespace
@@ -83,5 +84,15 @@ operator: namespace
     #!/bin/bash
 
     kubectl -n {{ namespace }} apply -k kustomization/operator
-
     kubectl -n {{ namespace }} rollout status deploy fabric-operator
+
+
+###############################################################################
+# Network
+###############################################################################
+
+cas:
+    #!/bin/bash
+    export NS={{ namespace }}
+
+    scripts/start_cas.sh
