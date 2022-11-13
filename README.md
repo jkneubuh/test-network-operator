@@ -20,9 +20,11 @@ just network-up
 
 TODO: 
 ```shell
-#just create-channel
-#just install-chaincode 
+# just create-channel
+# just install-chaincode ... 
+# just run-gateway-client ... 
 ```
+
 
 ## Teardown
 
