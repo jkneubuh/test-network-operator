@@ -3,26 +3,25 @@ Creates a HL Fabric network using fabric-operator
 
 ## TL/DR
 
-- On your mark
+Ready:
 ```shell
 just check 
 ```
 
-- Get set
+Set:
 ```shell
 just kind 
 ```
 
-- Go! 
+Go!
 ```shell
 just network-up
 ```
 
-- TODO: 
+TODO: 
 ```shell
-just create-channel
-
-just install-chaincode 
+#just create-channel
+#just install-chaincode 
 ```
 
 ## Teardown
