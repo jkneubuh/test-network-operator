@@ -46,6 +46,7 @@ check:
 cluster_name        := env_var_or_default("TEST_NETWORK_CLUSTER_NAME",      "kind")
 cluster_target      := env_var_or_default("TEST_NETWORK_CLUSTER_TARGET",    "kind")
 ingress_domain      := env_var_or_default("TEST_NETWORK_INGRESS_DOMAIN",    "localho.st")
+namespace           := env_var_or_default("TEST_NETWORK_NAMESPACE",         "test-network")
 
 # Start a local KIND cluster with nginx, localhost:5000 registry, and *.localho.st alias in kube DNS
 kind: unkind
@@ -61,3 +62,26 @@ unkind:
         docker kill kind-registry
         docker rm kind-registry
     fi
+
+###############################################################################
+#
+###############################################################################
+
+# Create the target namespace
+namespace:
+    #!/bin/bash
+    cat << EOF | kubectl apply -f -
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: {{ namespace }}
+    EOF
+
+
+# Launch the operator in the target namespace
+operator: namespace
+    #!/bin/bash
+
+    kubectl -n {{ namespace }} apply -k kustomization/operator
+
+    kubectl -n {{ namespace }} rollout status deploy fabric-operator
