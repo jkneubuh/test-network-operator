@@ -9,7 +9,7 @@ function wait_for() {
 }
 
 kubectl -n ${namespace} apply -k kustomization/cas
-sleep 5
+sleep 10
 
 wait_for ibpca org0-ca
 wait_for ibpca org1-ca
