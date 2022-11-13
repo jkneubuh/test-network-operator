@@ -7,13 +7,9 @@ Creates a HL Fabric network using fabric-operator
 just check 
 
 just kind 
-
-just operator 
 ```
 
 ```shell
-just start-cas
-
 just network-up
 ```
 
