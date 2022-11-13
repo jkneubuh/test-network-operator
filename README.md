@@ -1,5 +1,5 @@
 # test-network-operator
-Creates a HL Fabric network using fabric-operator
+Creates a Hyperledger Fabric test-network with the [fabric-operator](https://github.com/hyperledger-labs/fabric-operator)
 
 ## TL/DR
 
