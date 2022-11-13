@@ -3,7 +3,7 @@ Creates a HL Fabric network using fabric-operator
 
 ## TL/DR
 
-Ready:
+Ready?
 ```shell
 just check 
 ```
