@@ -93,7 +93,7 @@ then
   echo "${WARN} Please install the peer; suggested install commands:"
   echo "curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh | bash -s -- binary"
   echo 'export PATH=${PWD}/bin:$PATH'
-  echo 'export FABRIC_CFG_PATH=${PWD}/config'
+  #echo 'export FABRIC_CFG_PATH=${PWD}/config'
   EXIT=1
 else
   echo -e "${SUCCESS} peer found:\t\t$(cat /tmp/cmdpath)"
@@ -121,7 +121,7 @@ function must_declare() {
   fi
 }
 
-must_declare "FABRIC_CFG_PATH"
+#must_declare "FABRIC_CFG_PATH"
 #must_declare "WORKSHOP_PATH"
 
 rm /tmp/cmdpath &> /dev/null
