@@ -76,7 +76,7 @@ network-up: operator
     just start org2
 
 start org:
-    scripts/start_org.sh {{ org }}
+    network/{{ org }}/start.sh
 
 # Shut down the test network
 network-down:
