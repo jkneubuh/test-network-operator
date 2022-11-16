@@ -10,7 +10,7 @@
 print "starting org2 CA"
 
 apply_template network/org2/org2-ca.yaml
-sleep 2
+sleep 5
 wait_for ibpca org2-ca
 
 # Retrieve the org CA certificate for the bootstrap enrollment of peers/orderers
@@ -26,7 +26,7 @@ print "starting org2 peers"
 
 apply_template network/org2/org2-peer1.yaml
 apply_template network/org2/org2-peer2.yaml
-sleep 2 
+sleep 5
 
 wait_for ibppeer org2-peer1
 wait_for ibppeer org2-peer2
