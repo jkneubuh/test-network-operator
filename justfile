@@ -43,18 +43,21 @@ check:
 # KIND / k8s
 ###############################################################################
 
-cluster_name        := env_var_or_default("TEST_NETWORK_CLUSTER_NAME",      "kind")
-namespace           := env_var_or_default("TEST_NETWORK_NAMESPACE",         "test-network")
-operator_image      := env_var_or_default("TEST_NETWORK_OPERATOR_IMAGE",    "ghcr.io/hyperledger-labs/fabric-operator:latest-amd64")
+CLUSTER_NAME        := env_var_or_default("TEST_NETWORK_CLUSTER_NAME",      "kind")
+NAMESPACE           := env_var_or_default("TEST_NETWORK_NAMESPACE",         "test-network")
+#OPERATOR_IMAGE      := env_var_or_default("TEST_NETWORK_OPERATOR_IMAGE",    "ghcr.io/hyperledger-labs/fabric-operator:latest-amd64")
+OPERATOR_IMAGE      := env_var_or_default("TEST_NETWORK_OPERATOR_IMAGE",    "localhost:5000/fabric-operator:latest-arm64")
+FABRIC_VERSION      := env_var_or_default("TEST_NETWORK_FABRIC_VERSION",    "2.4.7")
+FABRIC_CA_VERSION   := env_var_or_default("TEST_NETWORK_FABRIC_CA_VERSION", "1.5.5")
 
-# Start a local KIND cluster with nginx, localhost:5000 registry, and *.localho.st alias in kube DNS
+# Start a local KIND cluster with nginx and insecure docker registry
 kind: unkind
-    scripts/kind_with_nginx.sh {{cluster_name}}
+    scripts/kind_with_nginx.sh {{CLUSTER_NAME}}
 
 # Shut down the KIND cluster
 unkind:
     #!/bin/bash
-    kind delete cluster --name {{cluster_name}}
+    kind delete cluster --name {{CLUSTER_NAME}}
 
     if docker inspect kind-registry &>/dev/null; then
         echo "Stopping container registry"
@@ -67,26 +70,26 @@ unkind:
 # Test Network
 ###############################################################################
 
-# Bring up the test network
-network-up: operator network-cas network-nodes
+network-up: operator
+    just start org0
+    just start org1
+    just start org2
+
+start org:
+    scripts/start_org.sh {{ org }}
 
 # Shut down the test network
 network-down:
-    #!/bin/bash
+    # heavy hammer:
+    kubectl delete ns {{ NAMESPACE }}
 
-    # or maybe kubectl delete namespace {{ namespace }} ?
-    kubectl -n {{ namespace }} delete ibpca --all
-    kubectl -n {{ namespace }} delete ibppeer --all
-    kubectl -n {{ namespace }} delete ibporderer --all
+    # let the operator clean house:
+    # kubectl -n {{ NAMESPACE }} delete ibpca --all
+    # kubectl -n {{ NAMESPACE }} delete ibppeer --all
+    # kubectl -n {{ NAMESPACE }} delete ibporderer --all
+    # ...
 
 # Launch the operator in the target namespace
 operator:
     scripts/start_operator.sh
 
-# Bring up the org CAs
-network-cas:
-    scripts/start_cas.sh
-
-# Bring up the network peer and orderer nodes
-network-nodes:
-    scripts/start_network.sh
