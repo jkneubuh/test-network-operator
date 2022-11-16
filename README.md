@@ -16,13 +16,25 @@ just kind
 
 Go!
 ```shell
+just operator
+
+just start org0
+just start org1
+just start org2
+```
+
+(or...) 
+```shell
 just network-up
 ```
+
 
 Check k8s with [k9s](https://k9scli.io/topics/install/):  
 ```shell
 k9s -n test-network
 ```
+
+
 
 TODO: 
 ```shell
