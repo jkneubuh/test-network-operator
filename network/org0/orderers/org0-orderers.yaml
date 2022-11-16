@@ -21,7 +21,7 @@ kind: IBPOrderer
 metadata:
   name: org0-orderers
 spec:
-  version: "2.4.4"
+  version: "${FABRIC_VERSION}"
   domain: "localho.st"
   license:
     accept: true
@@ -46,7 +46,7 @@ spec:
           cahost: test-network-org0-ca-ca.localho.st
           caport: "443"
           catls:
-            cacert: "${ORG0_CA_CERT}"
+            cacert: "${CA_CERT}"
           enrollid: "orderer1"
           enrollsecret: "orderer1pw"
         tls:
@@ -54,7 +54,7 @@ spec:
           cahost: test-network-org0-ca-ca.localho.st
           caport: "443"
           catls:
-            cacert: "${ORG0_CA_CERT}"
+            cacert: "${CA_CERT}"
           enrollid: "orderer1"
           enrollsecret: "orderer1pw"
           csr:
@@ -67,7 +67,7 @@ spec:
           cahost: test-network-org0-ca-ca.localho.st
           caport: "443"
           catls:
-            cacert: "${ORG0_CA_CERT}"
+            cacert: "${CA_CERT}"
           enrollid: "orderer2"
           enrollsecret: "orderer2pw"
         tls:
@@ -75,7 +75,7 @@ spec:
           cahost: test-network-org0-ca-ca.localho.st
           caport: "443"
           catls:
-            cacert: "${ORG0_CA_CERT}"
+            cacert: "${CA_CERT}"
           enrollid: "orderer2"
           enrollsecret: "orderer2pw"
           csr:
@@ -88,7 +88,7 @@ spec:
           cahost: test-network-org0-ca-ca.localho.st
           caport: "443"
           catls:
-            cacert: "${ORG0_CA_CERT}"
+            cacert: "${CA_CERT}"
           enrollid: "orderer3"
           enrollsecret: "orderer3pw"
         tls:
@@ -96,7 +96,7 @@ spec:
           cahost: test-network-org0-ca-ca.localho.st
           caport: "443"
           catls:
-            cacert: "${ORG0_CA_CERT}"
+            cacert: "${CA_CERT}"
           enrollid: "orderer3"
           enrollsecret: "orderer3pw"
           csr:
@@ -110,7 +110,7 @@ spec:
     ordererInitImage: registry.access.redhat.com/ubi8/ubi-minimal
     ordererInitTag: latest
     ordererImage: hyperledger/fabric-orderer
-    ordererTag: 2.4.4
+    ordererTag: 2.4.7
     grpcwebImage: ghcr.io/hyperledger-labs/grpc-web
     grpcwebTag: latest
   ingress:

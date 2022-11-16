@@ -54,8 +54,7 @@ spec:
         - name: image-pull-secret
       containers:
         - name: fabric-operator
-#          image:
-          image: ${operator_image}
+          image: ${OPERATOR_IMAGE}
           command:
             - ibp-operator
           livenessProbe:
