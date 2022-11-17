@@ -19,3 +19,14 @@ function apply_template() {
   local template=$1
   cat ${template} | envsubst | kubectl -n ${NAMESPACE} apply -f -
 }
+
+# Read a certificate by name from a node connection-profile config map.
+function connection_profile_cert() {
+  local node=$1
+  local path=$2
+
+  kubectl -n ${NAMESPACE} get cm/${node}-connection-profile -o json \
+    | jq -r .binaryData.\"profile.json\" \
+    | base64 -d \
+    | jq -r ${path}
+}

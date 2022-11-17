@@ -17,6 +17,8 @@ wait_for ibpca org0-ca
 export CA_CERT=$(kubectl -n ${NAMESPACE} get cm/org0-ca-connection-profile -o json | jq -r .binaryData.\"profile.json\" | base64 -d | jq -r .tls.cert)
 
 
+
+
 #
 # Network nodes
 #

@@ -64,31 +64,44 @@ unkind:
         docker rm kind-registry
     fi
 
+# Launch the operator in the target namespace
+operator:
+    scripts/start_operator.sh
 
 ###############################################################################
 # Test Network
 ###############################################################################
 
+# Bring up the entire network
 network-up: operator
     just start org0
     just start org1
     just start org2
 
+# Start the nodes for an org
 start org:
-    network/{{ org }}/start.sh
+    #!/bin/bash
 
-# Shut down the test network
-network-down:
-    # heavy hammer:
-    kubectl delete ns {{ NAMESPACE }}
+    # start the services
+    network/{{org}}/start.sh
 
-    # let the operator clean house:
-    # kubectl -n {{ NAMESPACE }} delete ibpca --all
-    # kubectl -n {{ NAMESPACE }} delete ibppeer --all
-    # kubectl -n {{ NAMESPACE }} delete ibporderer --all
-    # ...
+    # enroll users
+    network/{{org}}/enroll.sh
 
-# Launch the operator in the target namespace
-operator:
-    scripts/start_operator.sh
+# Enroll the users for an org
+enroll org:
+    network/{{org}}/enroll.sh
+
+# Shut down the test network and remove all certificates
+clean:
+    #!/bin/bash
+    rm -rf network/org0/enrollments
+    rm -rf network/org1/enrollments
+    rm -rf network/org2/enrollments
+    echo "network/org0/enrollments deleted"
+    echo "network/org1/enrollments deleted"
+    echo "network/org2/enrollments deleted"
+
+    kubectl delete ns {{ NAMESPACE }} --ignore-not-found=true
+
 
